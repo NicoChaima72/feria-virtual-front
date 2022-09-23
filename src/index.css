@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .container {
+    /* @apply mobile:max-w-[600px] tablet:max-w-[900px] desktop:max-w-[1200px]; */
+    @apply px-4 sm:px-8 lg:px-16 xl:px-24 max-w-full;
+  }
+}
+
+* {
+  font-family: "Rubik", sans-serif;
+  /* Eliminar fondo azul dispositivo movil click */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+/* body {
+  min-height: 100vh;
+  min-height: fill-available;
+  min-height: -webkit-fill-available;
+}
+
+html {
+  height: fill-available;
+  height: -webkit-fill-available;
+} */
+
+input:focus,
+textarea:focus,
+select:focus {
+  /* background-color: red!important;   */
+  box-shadow: none !important;
+}
+
+.select-tailwind .flex.items-stretch {
+  box-shadow: none !important;
+  border: 1px solid #d1d5db;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 0.1rem;
+}
+
+.select-tailwind .flex.items-stretch:active {
+  border: 1px solid #15803d;
+}
+
+.select-tailwind
+  .absolute.z-10.w-full.bg-white.shadow-lg.border.rounded.py-1.text-sm.text-gray-700 {
+  padding: 0.4rem;
+}
+
+.select-tailwind
+  .w-full.py-2.pl-8.text-sm.text-gray-500.bg-gray-100.border.border-gray-200.rounded {
+    box-shadow: none !important;
+    border: 1px solid #d1d5db;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  /* padding: 0.1rem; */
+}
+.select-tailwind
+.w-full.py-2.pl-8.text-sm.text-gray-500.bg-gray-100.border.border-gray-200.rounded:focus {
+  border: 1px solid #15803d;
+}
+
+.select-tailwind svg.absolute.w-5.h-5.ml-2.text-gray-500 {
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.select-tailwind .bg-gray-200.rounded-sm.flex.space-x-1 {
+  padding: 0 0.15rem;
+  border-radius: 0.2rem;
+}
