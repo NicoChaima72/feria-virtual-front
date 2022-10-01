@@ -1,6 +1,7 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
-import Login from "../pages/auth/LoginPage";
+
+const Login = lazy(() => import("../pages/auth/LoginPage"))
 
 const AuthRouter = () => {
   return (

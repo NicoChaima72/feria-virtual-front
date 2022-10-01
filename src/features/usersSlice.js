@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import feriaApi from "../interceptors/feriaInterceptor";
-import { setSessionStorage } from "../utils/session";
 
 const initialState = {
   users: [],

@@ -33,6 +33,46 @@ select:focus {
   box-shadow: none !important;
 }
 
+
+
+
+
+
+
+
+
+
+.react-select__control.react-select__control--is-focused {
+ border: 1px solid #15803d;
+ box-shadow: none;
+ border-radius: 0.5rem;
+}
+.react-select__control.react-select__control--is-focused:hover {
+ border: 1px solid #15803d;
+}
+/* .react-select__value-container.react-select__value-container--is-multi.react-select__value-container--has-value.css-1qfu80a-ValueContainer2 {
+  background-color: green;
+} */
+/* .css-b62m3t-container {
+  background-color: red!important;
+  border-radius: 4.5rem;
+} */
+
+.react-select__control.css-1s2u09g-control {
+  box-shadow: none !important;
+  border: 1px solid #d1d5db;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+/*.react-select__control.css-1s2u09g-control:hover {
+  background-color: green;
+} */
+
+
+
+
+/* ------------------------------------------------- */
 .select-tailwind .flex.items-stretch {
   box-shadow: none !important;
   border: 1px solid #d1d5db;
@@ -40,7 +80,6 @@ select:focus {
   border-radius: 0.5rem;
   padding: 0.1rem;
 }
-
 .select-tailwind .flex.items-stretch:active {
   border: 1px solid #15803d;
 }

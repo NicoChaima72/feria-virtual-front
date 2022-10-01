@@ -18,8 +18,12 @@ const uiSlice = createSlice({
     onShowConfirmLogout: (state, action) => {
       state.showConfirmLogout = action.payload;
     },
+    onShowConfirmLogout: (state, action) => {
+      state.showConfirmLogout = action.payload;
+    },
   },
 });
 
 export default uiSlice.reducer;
-export const { onToggleSidebar, onShowSidebar, onShowConfirmLogout } = uiSlice.actions;
+export const { onToggleSidebar, onShowSidebar, onShowConfirmLogout } =
+  uiSlice.actions;

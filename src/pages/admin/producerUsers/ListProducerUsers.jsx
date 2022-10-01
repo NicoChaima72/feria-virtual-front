@@ -43,7 +43,7 @@ const ListProducerUsers = () => {
             ></CircularProgress>
           </div>
         ) : (
-          <DrawDataTable type={"locals"} data={users}></DrawDataTable>
+          <DrawDataTable type={"producers"} data={users}></DrawDataTable>
         )}
       </div>
     </DivAnimate>

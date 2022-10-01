@@ -32,14 +32,17 @@ const ConfirmLogout = () => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           key="confirm-logout"
-          className="text-center flex flex-col bg-white p-8 pb-4 rounded-lg"
+          className="text-center flex flex-col bg-white rounded-lg"
           ref={ref}
         >
+          <div className="p-8 pb-4">
           <h2 className="text-2xl">Cerrar sesión</h2>
           <p>¿Estás seguro que quieres cerrar sesión?</p>
-          <div className="flex justify-around mt-8">
+
+          </div>
+          <div className="grid grid-cols-2">
             <button
-              className="hover:bg-gray-50 py-1 px-4 rounded"
+              className="hover:bg-gray-100 py-4 rounded col-span-1 rounded-bl-lg"
               onClick={() => {
                 dispatch(onShowConfirmLogout(false));
               }}
@@ -47,7 +50,7 @@ const ConfirmLogout = () => {
               Cancelar
             </button>
             <button
-              className="text-red-500 hover:text-red-700"
+              className="text-red-500 hover:text-red-700 hover:bg-gray-100 col-span-1 rounded-br-lg"
               onClick={() => dispatch(logout())}
             >
               Cerrar sesión

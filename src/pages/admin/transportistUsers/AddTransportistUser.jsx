@@ -72,7 +72,7 @@ const AddTransportistUser = () => {
   };
 
   return (
-    <div>
+    <DivAnimate>
       <h1 className="text-2xl md:text-3xl font-semibold">
         Agregar usuario transportista
       </h1>
@@ -292,7 +292,7 @@ const AddTransportistUser = () => {
           )}
         </button>
       </form>
-    </div>
+    </DivAnimate>
   );
 };
 

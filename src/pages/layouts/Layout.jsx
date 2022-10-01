@@ -9,7 +9,7 @@ import { onToggleSidebar } from "../../features/UISlice";
 import useWindowSize from "../../hooks/useWindowsSize";
 
 function Layout() {
-  const { showSidebar } = useSelector((state) => state.ui);
+  const { showSidebar, showConfirmLogout } = useSelector((state) => state.ui);
   const { message: messageSession, type: typeSession } = useSelector(
     (state) => state.session
   );
@@ -21,7 +21,9 @@ function Layout() {
       <Sidebar></Sidebar>
       <div
         className={`${
-          showSidebar && width <= 1000 ? "" : ""
+          (showSidebar && width <= 1000) || showConfirmLogout
+            ? "overflow-y-hidden"
+            : ""
         } flex-1 w-56 h-screen`}
       >
         {showSidebar && width <= 1000 && (

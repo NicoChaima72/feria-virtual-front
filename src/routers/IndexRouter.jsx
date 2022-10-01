@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, lazy } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import AuthRouter from "./AuthRouter";
 import { checkAuth, onLogin } from "../features/authSlice";
 import { onClearSession, onSetSession } from "../features/sessionSlice";
 import {
@@ -11,13 +10,14 @@ import {
   hasSessionStorage,
 } from "../utils/session";
 import AuthGuard from "../guards/AuthGuard";
-import AdminRouter from "./AdminRouter";
 import Layout from "../pages/layouts/Layout";
 import { navigateByRole } from "../utils/utils";
 import { AnimatePresence } from "framer-motion";
 import LoadingIndex from "../components/LoadingIndex";
 
-const rolesPath = [{ id: 1, path: "/admin" }];
+const AuthRouter = lazy(() => import("./AuthRouter"));
+const AdminRouter = lazy(() => import("./AdminRouter"));
+
 const IndexRouter = () => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -51,30 +51,35 @@ const IndexRouter = () => {
 
   return (
     <AnimatePresence>
-      <Routes>
-        <Route
-          path="/auth"
-          element={<AuthGuard beLoggedIn={false}></AuthGuard>}
-        >
-          <Route path="*" element={<AuthRouter></AuthRouter>}></Route>
-        </Route>
-        <Route path="/" element={<AuthGuard beLoggedIn={true}></AuthGuard>}>
+      <Suspense fallback={<LoadingIndex></LoadingIndex>}>
+        <Routes>
           <Route
-            path="/"
-            exact
-            element={
-              <Navigate to={navigateByRole(user?.role_id)} replace></Navigate>
-            }
-          ></Route>
-          <Route element={<Layout></Layout>}>
-            <Route path="admin/*" element={<AdminRouter></AdminRouter>}></Route>
-            <Route path="local/*" element={<></>}></Route>
-            <Route path="external/*" element={<></>}></Route>
-            <Route path="producer/*" element={<></>}></Route>
-            <Route path="transportist/*" element={<></>}></Route>
+            path="/auth"
+            element={<AuthGuard beLoggedIn={false}></AuthGuard>}
+          >
+            <Route path="*" element={<AuthRouter></AuthRouter>}></Route>
           </Route>
-        </Route>
-      </Routes>
+          <Route path="/" element={<AuthGuard beLoggedIn={true}></AuthGuard>}>
+            <Route
+              path="/"
+              exact
+              element={
+                <Navigate to={navigateByRole(user?.role_id)} replace></Navigate>
+              }
+            ></Route>
+            <Route element={<Layout></Layout>}>
+              <Route
+                path="admin/*"
+                element={<AdminRouter></AdminRouter>}
+              ></Route>
+              <Route path="local/*" element={<></>}></Route>
+              <Route path="external/*" element={<></>}></Route>
+              <Route path="producer/*" element={<></>}></Route>
+              <Route path="transportist/*" element={<></>}></Route>
+            </Route>
+          </Route>
+        </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 };

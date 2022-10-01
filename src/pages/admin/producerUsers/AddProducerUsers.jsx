@@ -1,33 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DivAnimate from "../../../components/DivAnimate";
 import moment from "moment";
 import { useForm } from "../../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
-import { createUser } from "../../../features/usersSlice";
 import AlertMessage from "../../../components/AlertMessage";
-import { setSessionStorage } from "../../../utils/session";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
-import Select from "react-tailwindcss-select";
 import { useState } from "react";
-
-const options = [
-  { value: "fox", label: "🦊 Fox" },
-  { value: "Butterfly", label: "🦋 Butterfly" },
-  { value: "Honeybee", label: "🐝 Honeybee" },
-];
+import Select from "react-select";
+import feriaApi from "../../../interceptors/feriaInterceptor";
+import { createUser } from "../../../features/usersSlice";
 
 const AddProducerUsers = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [fruitsVegetables, setFruitsVegetables] = useState([]);
+  const [loadFruitsVegetables, setLoadFruitsVegetables] = useState(true);
+  const [fruitsVegetablesSelected, setFruitsVegetablesSelected] =
+    useState([]);
   const { error, loadingAction } = useSelector((state) => state.users);
-  // ---------------
-  const [animal, setAnimal] = useState(null);
-  const handleChange = (target) => {
-    console.log(target);
-    setAnimal(target);
-  };
-  // ---------------
 
   const [formValues, handleInputChange, reset] = useForm({
     rut: "",
@@ -63,8 +54,58 @@ const AddProducerUsers = () => {
     contract_expired_at,
   } = formValues;
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const getFruitsVegetables = async () => {
+      const { data } = await feriaApi.get("/admin/fruits_vegetables");
+
+      const options = data.fruitsVegetables.map((fruitVegetable) => ({
+        value: fruitVegetable.id,
+        label: fruitVegetable.name,
+      }));
+
+      setFruitsVegetables(options);
+      setLoadFruitsVegetables(false);
+    };
+
+    getFruitsVegetables();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    let newUser = {
+      role_id: 4,
+      rut,
+      business_name,
+      name,
+      email,
+      fruits_vegetables: fruitsVegetablesSelected.map((f) => f.value),
+      region,
+      commune,
+      street,
+      observations,
+      direction_url,
+      phone,
+      contract_expired_at: moment(
+        new Date(`${contract_expired_at}T18:24:00`)
+      ).format("DD/MM/YYYY"),
+    };
+
+    const { meta } = await dispatch(createUser({ user: newUser }));
+    
+    if (meta.requestStatus === "rejected")
+      window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      
+    if (meta.requestStatus === "fulfilled") {
+      setSessionStorage({
+        message: "Usuario registrado correctamente",
+        type: "success",
+      });
+
+      navigate("/admin/users/producers");
+    }
   };
 
   return (
@@ -157,25 +198,7 @@ const AddProducerUsers = () => {
             </span>
           )}
         </div>
-        <div className="mb-6">
-          <label
-            htmlFor="rut"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            Frutas y verduras (*)
-          </label>
-          <div className="select-tailwind">
-            <Select
-              value={animal}
-              onChange={handleChange}
-              options={options}
-              isMultiple
-              isSearchable
-              placeholder=""
-              searchInputPlaceholder="Buscar..."
-            />
-          </div>
-        </div>
+
         <div className="mb-6">
           <label
             htmlFor="email"
@@ -200,6 +223,23 @@ const AddProducerUsers = () => {
               {error.fields.email.message}
             </span>
           )}
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="rut"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            Frutas y verduras
+          </label>
+          <Select
+            isMulti
+            classNamePrefix="react-select"
+            options={fruitsVegetables}
+            closeMenuOnSelect={false}
+            isLoading={loadFruitsVegetables}
+            placeholder=""
+            onChange={setFruitsVegetablesSelected}
+          />
         </div>
         <div className="mb-6">
           <label

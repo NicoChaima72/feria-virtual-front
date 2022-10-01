@@ -7,6 +7,7 @@ import AvatarName from "./AvatarName";
 import GroupIcon from "@mui/icons-material/Group";
 import LinkSidebar from "./LinkSidebar";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import EggIcon from '@mui/icons-material/Egg';
 
 const Sidebar = () => {
   const { showSidebar } = useSelector((state) => state.ui);
@@ -72,6 +73,11 @@ const Sidebar = () => {
                 to="/admin/users/transportists"
                 icon={GroupIcon}
                 title="Usuarios transportistas"
+              ></LinkSidebar>
+              <LinkSidebar
+                to="/admin/fruits-vegetables"
+                icon={EggIcon}
+                title="Frutas y verduras"
               ></LinkSidebar>
             </ul>
           </div>
