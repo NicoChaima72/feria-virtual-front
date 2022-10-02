@@ -8,10 +8,10 @@ import { CircularProgress } from "@mui/material";
 import DrawDataTable from "../../../components/DrawDataTable";
 
 const ListTransportistUsers = () => {
+  const dispatch = useDispatch();
   const { users, error, loading, roleName } = useSelector(
     (state) => state.users
   );
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUsersByRole({ role: "transportists", name: "transportists" }));
@@ -35,7 +35,7 @@ const ListTransportistUsers = () => {
         </Link>
       </div>
       <div className="mt-5">
-        {loading || roleName !== 'transportists' ? (
+        {loading || roleName !== "transportists" ? (
           <div className="flex items-center justify-center mt-7">
             <CircularProgress
               size={30}

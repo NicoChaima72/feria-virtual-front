@@ -225,10 +225,10 @@ export function DataTable({ columns, data }) {
                       key={header.id}
                       colSpan={header.colSpan}
                       scope="col"
-                      className="py-3 px-3"
+                      className="py-3 px-3 h-full"
                     >
                       {header.isPlaceholder ? null : (
-                        <>
+                        <div className="flex flex-col justify-start items-start min-h-[47px]">
                           <div
                             {...{
                               className: header.column.getCanSort()
@@ -251,7 +251,7 @@ export function DataTable({ columns, data }) {
                               <Filter column={header.column} table={table} />
                             </div>
                           ) : null}
-                        </>
+                        </div>
                       )}
                     </th>
                   );

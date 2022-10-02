@@ -6,6 +6,8 @@ import AdminDashboardPage from "../pages/admin/AdminDashboardPage";
 import AddExternalUsers from "../pages/admin/externalUsers/AddExternalUsers";
 import EditExternalUsers from "../pages/admin/externalUsers/EditExternalUsers";
 import ListExternalUsers from "../pages/admin/externalUsers/ListExternalUsers";
+import AddFruitsVegetables from "../pages/admin/fruitsVegetables/AddFruitsVegetables";
+import EditFruitsVegetables from "../pages/admin/fruitsVegetables/EditFruitsVegetables";
 import ListFruitsVegetables from "../pages/admin/fruitsVegetables/ListFruitsVegetables";
 import AddLocalUsers from "../pages/admin/localUsers/AddLocalUsers";
 import EditLocalUsers from "../pages/admin/localUsers/EditLocalUsers";
@@ -51,6 +53,8 @@ const AdminRouter = () => {
       </Route>
 
       <Route exact path="fruits-vegetables" element={<ListFruitsVegetables></ListFruitsVegetables>}></Route>
+      <Route exact path="fruits-vegetables/create" element={<AddFruitsVegetables></AddFruitsVegetables>}></Route>
+      <Route exact path="fruits-vegetables/:fruit_vegetable_id/edit" element={<EditFruitsVegetables></EditFruitsVegetables>}></Route>
       {/* <Route path="users/producers" element={<ProducersIndexPage />} />
         <Route path="users/producers/create" element={<ProducersCreatePage />} />
         <Route path="users/producers/:user_id/edit" element={<ProducersEditPage />} />

@@ -5,21 +5,17 @@ import authReducer from "../features/authSlice";
 import sessionReducer from "../features/sessionSlice";
 import usersReducer from "../features/usersSlice";
 import uiReducer from "../features/uiSlice";
-
-const composeEnhancers =
-  (typeof window !== "undefined" &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-  compose;
+import fruitsVegetablesReducer from "../features/fruitsVegetablesSlice";
 
 const reducers = combineReducers({
   auth: authReducer,
   session: sessionReducer,
   users: usersReducer,
+  fruitsVegetables: fruitsVegetablesReducer,
   ui: uiReducer,
 });
 
 export const store = configureStore({
   reducer: reducers,
-  // composeEnhancers(applyMiddleware(thunk))
   devTools: process.env.NODE_ENV !== "production",
 });

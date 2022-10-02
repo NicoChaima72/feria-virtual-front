@@ -7,6 +7,7 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import { changeStatusUser, onActiveUser } from "../features/usersSlice";
 import { Link } from "react-router-dom";
+import { onActiveFruitVegetable } from "../features/fruitsVegetablesSlice";
 
 const DrawDataTable = ({ type, data }) => {
   const dispatch = useDispatch();
@@ -315,7 +316,9 @@ const DrawDataTable = ({ type, data }) => {
       {
         header: () => <span>Frutas y verduras</span>,
         accessorFn: (row) =>
-          row.fruits_vegetables.length > 0 ? row.fruits_vegetables.join(", ") : "...",
+          row.fruits_vegetables.length > 0
+            ? row.fruits_vegetables.join(", ")
+            : "...",
         id: "fruits_vegetables",
       },
       { header: () => <span>Region</span>, accessorKey: "region" },
@@ -507,6 +510,64 @@ const DrawDataTable = ({ type, data }) => {
                 ></ArrowUpwardIcon>
               )}
             </button>
+          </div>
+        ),
+      },
+    ];
+  }
+
+  if (type === "fruitsVegetables") {
+    columns = [
+      {
+        header: () => <span>ID</span>,
+        id: "id",
+        cell: ({ cell }) => cell.row.original.id,
+      },
+      { header: () => <span>Nombre</span>, accessorKey: "name" },
+      {
+        header: () => <span></span>,
+        id: "actions",
+        cell: ({ cell }) => (
+          <div className="flex space-x-1">
+            <Link
+              to={`/admin/fruits-vegetables/${cell.row.original.id}/edit`}
+              type="button"
+              className="text-white bg-blue-700 hover:bg-blue-800 rounded px-2 py-1.5"
+              title="Editar"
+              onClick={() => dispatch(onActiveFruitVegetable(cell.row.original))}
+            >
+              <EditIcon sx={{ width: 22, height: 22 }}></EditIcon>
+            </Link>
+            {/* <button
+              type="button"
+              className={`${
+                cell.row.original.status == 1
+                  ? "bg-red-700 hover:bg-red-800"
+                  : "bg-green-700 hover:bg-green-800"
+              } text-white  rounded px-2 py-1.5`}
+              title="Cambiar estado"
+              onClick={() =>
+                confirm(
+                  `Dar de ${
+                    cell.row.original.status == 1 ? "BAJA" : "ALTA"
+                  } a ${JSON.stringify(
+                    cell.row.original.name
+                  )} - ${JSON.stringify(cell.row.original.business_name)}`
+                )
+                  ? handleChangeStatus(cell.row.original.id)
+                  : null
+              }
+            >
+              {cell.row.original.status == 1 ? (
+                <ArrowDownwardIcon
+                  sx={{ width: 22, height: 22 }}
+                ></ArrowDownwardIcon>
+              ) : (
+                <ArrowUpwardIcon
+                  sx={{ width: 22, height: 22 }}
+                ></ArrowUpwardIcon>
+              )}
+            </button> */}
           </div>
         ),
       },

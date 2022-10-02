@@ -97,7 +97,6 @@ export const updateUser = createAsyncThunk(
       else if (user.role_id === 4) endpoint = "producers";
       else if (user.role_id === 5) endpoint = "transportists";
 
-      console.log({ url: `/admin/users/${endpoint}/${user.id}`, user });
       await feriaApi.put(`/admin/users/${endpoint}/${user.id}`, { ...user });
 
       return true;
@@ -137,7 +136,7 @@ export const changeStatusUser = createAsyncThunk(
   }
 );
 
-const authSlice = createSlice({
+const userSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
@@ -166,6 +165,11 @@ const authSlice = createSlice({
       state.loading = false;
       state.users = action.payload;
       state.error = null;
+    });
+    builder.addCase(getUsersByRole.rejected, (state, action) => {
+      state.loading = false;
+      state.users = [];
+      state.error = action.payload;
     });
     builder.addCase(createUser.pending, (state, action) => {
       state.error = null;
@@ -210,6 +214,6 @@ const authSlice = createSlice({
   },
 });
 
-export default authSlice.reducer;
+export default userSlice.reducer;
 export const { onClearUsers, onActiveUser, onRoleName, onClearUserActive } =
-  authSlice.actions;
+  userSlice.actions;
