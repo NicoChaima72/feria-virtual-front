@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import AlertMessage from "../../components/AlertMessage";
 import Navbar from "../../components/Navbar";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../components/Sidebar/Sidebar";
 import { onToggleSidebar } from "../../features/UISlice";
 import useWindowSize from "../../hooks/useWindowsSize";
 

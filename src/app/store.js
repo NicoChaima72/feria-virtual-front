@@ -5,6 +5,7 @@ import authReducer from "../features/authSlice";
 import sessionReducer from "../features/sessionSlice";
 import usersReducer from "../features/usersSlice";
 import uiReducer from "../features/uiSlice";
+import salesReducer from "../features/salesSlice";
 import fruitsVegetablesReducer from "../features/fruitsVegetablesSlice";
 
 const reducers = combineReducers({
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   users: usersReducer,
   fruitsVegetables: fruitsVegetablesReducer,
   ui: uiReducer,
+  sales: salesReducer,
 });
 
 export const store = configureStore({

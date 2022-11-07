@@ -42,6 +42,10 @@ select:focus {
 
 
 
+.css-b62m3t-container {
+  width: 100%!important;
+}
+
 .react-select__control.react-select__control--is-focused {
  border: 1px solid #15803d;
  box-shadow: none;

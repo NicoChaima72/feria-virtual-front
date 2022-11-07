@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { onShowSidebar } from "../features/uiSlice";
+import { onShowSidebar } from "../../features/uiSlice";
 
 const LinkSidebar = ({ to, icon: Icon, title, notification, end = false }) => {
   const dispatch = useDispatch();

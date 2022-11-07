@@ -24,7 +24,6 @@ const ConfirmLogout = () => {
     showConfirmLogout && (
       <div
         className="absolute inset-0 z-50 flex justify-center items-center"
-        onClick={() => console.log("hola mundo")}
         style={{ backgroundColor: "rgba(0,0,0, .3)" }}
       >
         <motion.div

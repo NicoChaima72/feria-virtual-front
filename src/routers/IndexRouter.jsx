@@ -14,9 +14,12 @@ import Layout from "../pages/layouts/Layout";
 import { navigateByRole } from "../utils/utils";
 import { AnimatePresence } from "framer-motion";
 import LoadingIndex from "../components/LoadingIndex";
+import ProducerRouter from "./ProducerRouter";
+import TransportistRouter from "./TransportistRouter";
 
 const AuthRouter = lazy(() => import("./AuthRouter"));
 const AdminRouter = lazy(() => import("./AdminRouter"));
+const LocalRouter = lazy(() => import("./LocalRouter"));
 
 const IndexRouter = () => {
   const dispatch = useDispatch();
@@ -72,10 +75,13 @@ const IndexRouter = () => {
                 path="admin/*"
                 element={<AdminRouter></AdminRouter>}
               ></Route>
-              <Route path="local/*" element={<></>}></Route>
+              <Route
+                path="local/*"
+                element={<LocalRouter></LocalRouter>}
+              ></Route>
               <Route path="external/*" element={<></>}></Route>
-              <Route path="producer/*" element={<></>}></Route>
-              <Route path="transportist/*" element={<></>}></Route>
+              <Route path="producer/*" element={<ProducerRouter></ProducerRouter>}></Route>
+              <Route path="transportist/*" element={<TransportistRouter></TransportistRouter>}></Route>
             </Route>
           </Route>
         </Routes>

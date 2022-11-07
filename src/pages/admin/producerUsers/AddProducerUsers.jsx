@@ -10,14 +10,14 @@ import { useState } from "react";
 import Select from "react-select";
 import feriaApi from "../../../interceptors/feriaInterceptor";
 import { createUser } from "../../../features/usersSlice";
+import { setSessionStorage } from "../../../utils/session";
 
 const AddProducerUsers = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [fruitsVegetables, setFruitsVegetables] = useState([]);
   const [loadFruitsVegetables, setLoadFruitsVegetables] = useState(true);
-  const [fruitsVegetablesSelected, setFruitsVegetablesSelected] =
-    useState([]);
+  const [fruitsVegetablesSelected, setFruitsVegetablesSelected] = useState([]);
   const { error, loadingAction } = useSelector((state) => state.users);
 
   const [formValues, handleInputChange, reset] = useForm({
@@ -94,10 +94,10 @@ const AddProducerUsers = () => {
     
     if (meta.requestStatus === "rejected")
       window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      
+        top: 0,
+        behavior: "smooth",
+      });
+
     if (meta.requestStatus === "fulfilled") {
       setSessionStorage({
         message: "Usuario registrado correctamente",

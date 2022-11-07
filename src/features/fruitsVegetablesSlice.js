@@ -113,7 +113,8 @@ const fruitsVegetablesSlice = createSlice({
       state.loadingActive = false;
     },
     onClearActive: (state) => {
-      (state.fruitVegetableActive = null), (state.loadingActive = true);
+      state.fruitVegetableActive = null;
+      state.loadingActive = true;
     },
   },
   extraReducers: (builder) => {

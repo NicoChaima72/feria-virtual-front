@@ -18,6 +18,12 @@ import ListProducerUsers from "../pages/admin/producerUsers/ListProducerUsers";
 import AddTransportistUser from "../pages/admin/transportistUsers/AddTransportistUser";
 import EditTransportistUsers from "../pages/admin/transportistUsers/EditTransportistUsers";
 import ListTransportistUsers from "../pages/admin/transportistUsers/ListTransportistUsers";
+import ListSales from "../pages/admin/sales/ListSales";
+import AcceptOrDeclineSale from "../pages/admin/sales/AcceptOrDeclineSale";
+import ListAuctionsProducer from "../pages/admin/sales/ListAuctionsProducer";
+import StartAuctionTransportist from "../pages/admin/sales/StartAuctionTransportist";
+import ListAuctionsTransportist from "../pages/admin/sales/ListAuctionsTransportist";
+import ShowSale from "../pages/admin/sales/ShowSale";
 
 // const AdminDashboardPage = lazy(() => import("../pages/admin/AdminDashboardPage"));
 // const AddExternalUsers = lazy(() => import("../pages/admin/externalUsers/AddExternalUsers"));
@@ -33,10 +39,17 @@ import ListTransportistUsers from "../pages/admin/transportistUsers/ListTranspor
 // const ListTransportistUsers = lazy(() => import("../pages/admin/transportistUsers/ListTransportistUsers"));
 
 const AdminRouter = () => {
-  const { showConfirmLogout } = useSelector((state) => state.ui);
   return (
     <Routes>
       <Route index element={<AdminDashboardPage></AdminDashboardPage>} />
+      <Route path="sales/">
+        <Route exact index element={<ListSales></ListSales>}></Route>
+        <Route exact path=":sale_id/accept-decline" element={<AcceptOrDeclineSale></AcceptOrDeclineSale>}></Route>
+        <Route exact path=":sale_id/details" element={<ShowSale></ShowSale>}></Route>
+        <Route exact path=":sale_id/auctions-producer" element={<ListAuctionsProducer></ListAuctionsProducer>}></Route>
+        <Route exact path=":sale_id/transportist/start" element={<StartAuctionTransportist></StartAuctionTransportist>}></Route>
+        <Route exact path=":sale_id/auctions-transportist" element={<ListAuctionsTransportist></ListAuctionsTransportist>}></Route>
+      </Route>
       <Route  path="users/">
         <Route exact path="locals" element={<ListLocalUsers></ListLocalUsers>}></Route>
         <Route exact path="locals/create" element={<AddLocalUsers></AddLocalUsers>}></Route>

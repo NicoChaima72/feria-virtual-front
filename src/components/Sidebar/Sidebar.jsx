@@ -2,12 +2,9 @@ import { Avatar } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import useWindowSize from "../hooks/useWindowsSize";
-import AvatarName from "./AvatarName";
-import GroupIcon from "@mui/icons-material/Group";
-import LinkSidebar from "./LinkSidebar";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import EggIcon from '@mui/icons-material/Egg';
+import useWindowSize from "../../hooks/useWindowsSize";
+import AvatarName from "../AvatarName";
+import LinksRoutes from "./LinksRoutes";
 
 const Sidebar = () => {
   const { showSidebar } = useSelector((state) => state.ui);
@@ -46,40 +43,7 @@ const Sidebar = () => {
               </div>
             </div>
             <div className="border"></div>
-            <ul className="space-y-2 mt-2">
-              <LinkSidebar
-                to="/admin"
-                icon={DashboardIcon}
-                title="Dashboard"
-                notification={3}
-                end={true}
-              ></LinkSidebar>
-              <LinkSidebar
-                to="/admin/users/locals"
-                icon={GroupIcon}
-                title="Clientes locales"
-              ></LinkSidebar>
-              <LinkSidebar
-                to="/admin/users/externals"
-                icon={GroupIcon}
-                title="Clientes extranjeros"
-              ></LinkSidebar>
-              <LinkSidebar
-                to="/admin/users/producers"
-                icon={GroupIcon}
-                title="Usuarios productores"
-              ></LinkSidebar>
-              <LinkSidebar
-                to="/admin/users/transportists"
-                icon={GroupIcon}
-                title="Usuarios transportistas"
-              ></LinkSidebar>
-              <LinkSidebar
-                to="/admin/fruits-vegetables"
-                icon={EggIcon}
-                title="Frutas y verduras"
-              ></LinkSidebar>
-            </ul>
+            <LinksRoutes></LinksRoutes>
           </div>
         </motion.aside>
       )}
